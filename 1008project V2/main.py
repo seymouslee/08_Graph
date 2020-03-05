@@ -1,9 +1,10 @@
 import nodes
+import edges
 import networkx as nx
+import matplotlib.pyplot as plt
 
 punggol = nx.Graph()
-punggol = nodes.insertHDBNodes(punggol)
-punggol = nodes.insertBusNodes(punggol)
-punggol = nodes.insertLRTNodes(punggol)
+punggol = nodes.insertAllNodes(punggol)
+punggol = edges.insertAllEdges(punggol)
 
 print(punggol.nodes.data())

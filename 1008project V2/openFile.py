@@ -4,11 +4,20 @@ from csv import writer
 import pandas as pd
 import csv as cv
 
-def openfile(csv_name):
+# to parse a csv containing nodes
+def openNode(csv_name):
     with open(csv_name, newline='') as csvfile:
         colnames = ['id', 'name', 'latitude', 'longitude']
         data = pd.read_csv(csv_name, header=None, names=colnames)
         return data
+
+# to parse a csv containing edges
+def openEdge(csv_name):
+    with open(csv_name, newline='') as csvfile:
+        colnames = ['start', 'end', 'distance', 'time', 'service']
+        data = pd.read_csv(csv_name, header=None, names=colnames)
+        return data
+
 
 def copy_csv(csv_name):
     df = pd.read_csv(csv_name)
@@ -37,22 +46,6 @@ def serachAttribute(csv_name, attribute, data):
     for index, row in df.iterrows():
         if row[attribute] == data:
             print(row)
-
-def getNodes(data):
-    postal = data.id.tolist()
-    return postal
-
-def getName(data):
-    name = data.name.tolist()
-    return name
-
-def getLatitude(data):
-    latitude = data.latitude.tolist()
-    return latitude
-
-def getlongitude(data):
-    longitude = data.longitude.tolist()
-    return longitude
 
 
 

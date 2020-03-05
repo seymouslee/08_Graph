@@ -4,45 +4,15 @@ from csv import writer
 import pandas as pd
 import csv as cv
 
-def openfile():
-    with open('hdb-coordinates.csv', newline='') as csvfile:
-        colnames = ['postal', 'latitude', 'longtitude', 'searchval', 'blk_no', 'road_name', 'buidling', 'address']
-        data = pd.read_csv('hdb-coordinates.csv', header=None, names=colnames)
+def openfile(csv_name):
+    with open(csv_name, newline='') as csvfile:
+        colnames = ['id', 'name', 'latitude', 'longitude']
+        data = pd.read_csv(csv_name, header=None, names=colnames)
         return data
 
-def ogOpenfile():
-    with open('hdb-coordinates.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        return reader
-
-def copy_csv(filename):
-    df = pd.read_csv('hdb-coordinates.csv')
-    df.to_csv('copy_of_' + 'hdb-coordinates.csv')
-
-def getNodes(data):
-    postal = data.postal.tolist()
-    return postal
-
-def getLatitude(data):
-    latitude = data.latitude.tolist()
-    return latitude
-
-def getlongtitude(data):
-    longtitude = data.longtitude.tolist()
-    return longtitude
-
-def getblk_no(data):
-    blk_no = data.blk_no.tolist()
-    return blk_no
-
-def getaddress(data):
-    address = data.address.tolist()
-    return address
-
-def getroad_name(data):
-    road_name = data.road_name.tolist()
-    return road_name
-
+def copy_csv(csv_name):
+    df = pd.read_csv(csv_name)
+    df.to_csv('copy_of_' + csv_name)
 
 # append new row to the last row
 def append_list_as_row(file_name, list_of_elem):
@@ -59,15 +29,35 @@ def append_list_as_row(file_name, list_of_elem):
     # Append a list as new line to an old csv file
     #append_list_as_row('copy_of_hdb-coordinates.csv', row_contents)
 
-def serachLatitude(attribute, data):
+def serachAttribute(csv_name, attribute, data):
     # user_input = "1.397847151"  # hard code
     # search based on user input
-    df = pd.read_csv("copy_of_hdb-coordinates.csv")
-    print
+    df = pd.read_csv(csv_name)
 
     for index, row in df.iterrows():
         if row[attribute] == data:
             print(row)
+
+def getNodes(data):
+    postal = data.id.tolist()
+    return postal
+
+def getName(data):
+    name = data.name.tolist()
+    return name
+
+def getLatitude(data):
+    latitude = data.latitude.tolist()
+    return latitude
+
+def getlongitude(data):
+    longitude = data.longitude.tolist()
+    return longitude
+
+
+
+
+
 
 
 

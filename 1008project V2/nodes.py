@@ -1,29 +1,28 @@
 import openFile
-import networkx as nx
 
-def insertNodes():
-    colnames = ['latitude', 'longtitude', 'searchval', 'blk_no', 'road_name', 'buidling', 'address']
+def insertHDBNodes(g):
+    data = openFile.openfile(r"Database\Final Node CSVs\hdb_nodes.csv")
+    return insertNodes(g, data, "hdb")
 
-    punggol = nx.Graph()
-    data = openFile.openfile()
+def insertBusNodes(g):
+    data = openFile.openfile(r"Database\Final Node CSVs\bus_stop_nodes.csv")
+    return insertNodes(g, data, "bus")
+
+def insertLRTNodes(g):
+    data = openFile.openfile(r"Database\Final Node CSVs\lrt_nodes.csv")
+    return insertNodes(g, data, "lrt")
+
+
+def insertNodes(g, data, Nodetype):
     Nodes = openFile.getNodes(data)
+    name = openFile.getName(data)
     latitude = openFile.getLatitude(data)
-    longtitude = openFile.getlongtitude(data)
-    blk_no=openFile.getblk_no(data)
-    road_name = openFile.getroad_name(data)
-    address = openFile.getroad_name(data)
+    longitude = openFile.getlongitude(data)
+    for i in range(1, len(Nodes)):
+        g.add_node(Nodes[i],
+                   name=name[i],
+                   latitude=latitude[i],
+                   longitude=longitude[i],
+                   type=Nodetype)
 
-    openFile.serachLatitude("latitude", "1.397946168")
-
-    for i in range(1,len(Nodes)):
-        punggol.add_node(Nodes[i],
-                         latitude=latitude[i],
-                         longtitude=longtitude[i],
-                         blk_no=blk_no[i],
-                         road_name=road_name[i],
-                         address=address[i])
-
-    return punggol
-
-
-
+    return g

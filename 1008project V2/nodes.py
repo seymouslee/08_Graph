@@ -27,9 +27,7 @@ def insertNodes(g, data, Nodetype):
     for i in range(1, len(Nodes)):
         g.add_node(Nodes[i],
                    name=name[i],
-                   pos=(float(longitude[i]), float(latitude[i]),),
-                   # x=latitude[i],
-                   # y=longitude[i],
+                   pos=(float(longitude[i]), float(latitude[i])),
                    type=Nodetype)
 
     return g
